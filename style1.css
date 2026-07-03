@@ -12,9 +12,9 @@ html, body {
 body {
   background-color: black;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 0px 1fr;
   grid-template-rows: 4rem 1fr 4rem;
-  grid-template-areas: "navbar" "main" "foot";
+  grid-template-areas: "navbar navbar" "sidebar main" "foot foot";
 }
 
 .navbar {
@@ -40,11 +40,68 @@ body {
 .sidebar {
   grid-area: sidebar;
   background-color: blue;
+  position: fixed;
+  top: 4rem;
+  height: calc(100vh - 64px);
+  width: 200px;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .main {
   grid-area: main;
   background-color: sienna;
+}
+.main .greet {
+  background-image: url(assets/poster.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  margin: 1.5rem 1rem;
+  aspect-ratio: 4/1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 15px;
+}
+.main .greet .text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.main .greet h1 {
+  font-size: clamp(1.5rem, 6vw, 5rem);
+}
+.main .greet p {
+  font-size: clamp(1rem, 4vw, 1.8rem);
+  font-weight: 400;
+}
+.main .greet button {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  background: linear-gradient(to right, #e100ff, #7f00ff);
+  color: white;
+}
+.main .greet button i {
+  font-size: 1.5rem;
 }
 
 .foot {
