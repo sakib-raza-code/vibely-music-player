@@ -9,6 +9,10 @@ html, body {
   height: 100%;
 }
 
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 body {
   background-color: black;
   display: grid;
@@ -43,6 +47,16 @@ body {
   position: fixed;
   top: 3.5rem;
   height: calc(100vh - 3.5rem);
+  width: 60%;
+  max-width: 300px;
+}
+.sidebar .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: white;
+  width: 100%;
+  font-size: 1.5rem;
 }
 
 .show {
@@ -56,6 +70,7 @@ body {
 .main {
   grid-area: main;
   background-color: sienna;
+  padding: 0 1rem;
 }
 .main .greet {
   background-image: url(assets/poster.jpg);
@@ -64,7 +79,7 @@ body {
   padding: 1rem;
   background-color: black;
   color: white;
-  margin: 1.5rem 1rem;
+  margin: 1.5rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -101,6 +116,48 @@ body {
 .main .greet button i {
   font-size: 1.5rem;
 }
+.main .titles {
+  display: none;
+}
+.main .song-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.main .song-list .song {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.main .song-list .song .details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 11rem;
+}
+.main .song-list .song .details img {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid black;
+}
+.main .song-list .song .details .name h5 {
+  font-size: 1.2rem;
+  color: white;
+}
+.main .song-list .song .details .name p {
+  font-weight: 400;
+  color: white;
+  opacity: 0.7;
+}
+.main .song-list .song .duration p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: white;
+  opacity: 0.7;
+}
 
 .foot {
   grid-area: foot;
@@ -112,24 +169,32 @@ body {
     grid-template-columns: 15rem 1fr;
     grid-template-areas: "sidebar navbar" "sidebar main" "foot foot";
   }
+  .navbar {
+    justify-content: flex-end;
+  }
   .navbar .menu {
+    display: none;
+  }
+  .navbar h2 {
     display: none;
   }
   .navbar .search-bar {
     display: flex;
     align-items: center;
-    gap: 8rem;
     border: 1px solid gray;
     padding: 0.3rem 1rem;
     border-radius: 10px;
-    max-width: 300px;
+    width: 40%;
   }
   .navbar .search-bar input {
     display: block;
     border: none;
     outline: none;
     width: 100%;
+    height: 100%;
     font-size: 1rem;
+    background-color: black;
+    color: white;
   }
   .hide {
     display: block;
@@ -137,11 +202,65 @@ body {
   .sidebar {
     top: 0;
     width: 15rem;
+    padding: 1rem;
   }
   .sidebar .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1rem;
     color: white;
+    width: 100%;
+    font-size: 1.5rem;
+  }
+  .sidebar .options {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .sidebar .options .optn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.5rem;
+    color: white;
+  }
+  .sidebar .options .optn i {
+    font-size: 1.2rem;
+  }
+  .sidebar .options .optn h4 {
+    font-size: 1rem;
+  }
+  .sidebar .options .optn:hover {
+    background-color: rgba(136, 18, 254, 0.4235294118);
+    border-radius: 8px;
+  }
+  .main .titles {
+    padding: 1rem 1.5rem;
+    padding-bottom: 0;
+    font-weight: 400;
+    color: white;
+    opacity: 0.5;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .main .titles .duration {
+    text-align: end;
+  }
+  .main .song-list .song {
+    padding: 1rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "detail duration";
+  }
+  .main .song-list .song .details {
+    grid-area: detail;
+  }
+  .main .song-list .song .duration {
+    grid-area: duration;
+  }
+  .main .song-list .song .duration p {
+    text-align: end;
   }
 }/*# sourceMappingURL=style1.css.map */

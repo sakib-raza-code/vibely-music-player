@@ -8,6 +8,9 @@ html,body{
     width: 100%;
     height: 100%;
 }
+html {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 body{
     background-color: black;
     display: grid;
@@ -48,6 +51,17 @@ body{
     position: fixed;
     top: 3.5rem;
     height: calc(100vh - 3.5rem);
+    width: 60%;
+    max-width: 300px;
+    .logo{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
+        width: 100%;
+        font-size: 1.5rem;
+    }
+
 }
 .show {
     display: block;
@@ -59,6 +73,7 @@ body{
 .main{
     grid-area: main;
     background-color: sienna;
+    padding: 0 1rem;
     .greet{
         background-image: url(assets/poster.jpg);
         background-size: cover;
@@ -66,7 +81,7 @@ body{
         padding: 1rem;
         background-color: black;
         color: white;
-        margin: 1.5rem 1rem;
+        margin: 1.5rem 0;
         // aspect-ratio: 4 / 1;       // see this
         display: flex;
         flex-direction: column;
@@ -104,6 +119,57 @@ body{
         }
 
     }
+
+    .titles{
+        display: none;
+    }
+
+    .song-list{
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        .song{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-radius: 10px;
+            .details{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 11rem;
+
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                    border: 1px solid black;
+                }
+                .name {
+                    h5 {
+                        font-size: 1.2rem;
+                        color: white;
+                    }
+                    p{
+                        font-weight: 400;
+                        color: white;
+                        opacity: 0.7;
+                    }
+                }
+
+            }
+
+            .duration{
+                p{
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                    color: white;
+                    opacity: 0.7;
+                }
+            }
+        }
+    }
 }
 
 .foot{
@@ -122,24 +188,31 @@ body{
         ;
     }
     .navbar{
+        justify-content: flex-end;
         .menu {
+            display: none;
+        }
+        h2{
             display: none;
         }
         .search-bar {               // fix this search bar
             display: flex;
             align-items: center;
-            gap: 8rem;
+            // gap: 8rem;
             border: 1px solid gray;
             padding: 0.3rem 1rem;
             border-radius: 10px;
-            max-width: 300px;
-
+            width: 40%;
+            
             input {
                 display: block;
                 border: none;
                 outline: none;
                 width: 100%;
+                height: 100%;
                 font-size: 1rem;
+                background-color: black;
+                color: white;
             }
         }
     }
@@ -150,12 +223,81 @@ body{
     .sidebar {
         top: 0;
         width: 15rem;
+        padding: 1rem;
         .logo{
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
             color: white;
+            width: 100%;
+            font-size: 1.5rem;
+        }
+        .options{
+            margin-top: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            .optn{
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.7rem 0.5rem;
+                color: white;
+                i{
+                    font-size: 1.2rem;
+                }
+                h4{
+                    font-size: 1rem;
+                }
+            }
+            .optn:hover{
+                background-color: #8812fe6c;
+                border-radius: 8px;
+            }
         }
     }
+
+    .main{
+        .titles{
+            // display: flex;
+            // align-items: center;
+            // justify-content: space-between;
+            padding: 1rem 1.5rem;
+            padding-bottom: 0;
+            font-weight: 400;
+            color: white;
+            opacity: 0.5;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            .duration{
+                text-align: end;
+            }
+        }
+
+        .song-list{
+            .song{
+                padding: 1rem 1.5rem;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-areas: 
+                    "detail duration"
+                ;
+                .details{
+                    grid-area: detail;
+                }
+
+                .duration{
+                    grid-area: duration;
+                    p{
+                        text-align: end;
+                    }
+                }
+            }
+        }
+        
+    }
+
 }
 
