@@ -15,7 +15,7 @@ body{
     background-color: black;
     display: grid;
     grid-template-columns: 0px 1fr;
-    grid-template-rows: 3.5rem 1fr 3.5rem;
+    grid-template-rows: 3.5rem 1fr 5rem;
     grid-template-areas:
     "navbar navbar"
     "sidebar main"
@@ -50,7 +50,7 @@ body{
     background-color: blue;
     position: fixed;
     top: 3.5rem;
-    height: calc(100vh - 3.5rem);
+    height: calc(100vh - 5rem);
     width: 60%;
     max-width: 300px;
     .logo{
@@ -175,6 +175,45 @@ body{
 .foot{
     grid-area: foot;
     background-color: red;
+
+    .laptop{
+        display: none;
+    }
+
+    .mobile{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        .details{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            img{
+                width: 3rem;
+                height: 3rem;
+            }
+            .name{
+                color: white;
+                h5{
+                    font-size: 1.1rem;
+                }
+                p{
+                    font-weight: 500;
+                    opacity: 0.6;
+                }
+            }
+        }
+        i{
+            font-style: normal;
+            font-size: 1.5rem;
+        }
+        .pause{
+            display: none;
+        }
+    }
+    
 }
 
 
@@ -297,6 +336,54 @@ body{
             }
         }
         
+    }
+
+    .foot{
+
+        .mobile{
+            display: none;
+        }
+
+        .laptop{
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+
+            .details{
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                img{
+                    width: 3rem;
+                    height: 3rem;
+                }
+                .name{
+                    color: white;
+                    h5{
+                        font-size: 1.1rem;
+                    }
+                    p{
+                        font-weight: 500;
+                        opacity: 0.6;
+                    }
+                }
+            }
+
+            .btns{
+                font-size: 3rem;
+                color: white;
+                display: flex;
+                gap: 1.5rem;
+            }
+
+            .controls{
+                display: flex;
+                gap: 3rem;
+
+            }
+        }
     }
 
 }

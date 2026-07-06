@@ -17,7 +17,7 @@ body {
   background-color: black;
   display: grid;
   grid-template-columns: 0px 1fr;
-  grid-template-rows: 3.5rem 1fr 3.5rem;
+  grid-template-rows: 3.5rem 1fr 5rem;
   grid-template-areas: "navbar navbar" "sidebar main" "foot foot";
 }
 
@@ -46,7 +46,7 @@ body {
   background-color: blue;
   position: fixed;
   top: 3.5rem;
-  height: calc(100vh - 3.5rem);
+  height: calc(100vh - 5rem);
   width: 60%;
   max-width: 300px;
 }
@@ -163,6 +163,42 @@ body {
   grid-area: foot;
   background-color: red;
 }
+.foot .laptop {
+  display: none;
+}
+.foot .mobile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+.foot .mobile .details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.foot .mobile .details img {
+  width: 3rem;
+  height: 3rem;
+}
+.foot .mobile .details .name {
+  color: white;
+}
+.foot .mobile .details .name h5 {
+  font-size: 1.1rem;
+}
+.foot .mobile .details .name p {
+  font-weight: 500;
+  opacity: 0.6;
+}
+.foot .mobile i {
+  font-style: normal;
+  font-size: 1.5rem;
+}
+.foot .mobile .pause {
+  display: none;
+}
 
 @media (min-width: 1020px) {
   body {
@@ -262,5 +298,44 @@ body {
   }
   .main .song-list .song .duration p {
     text-align: end;
+  }
+  .foot .mobile {
+    display: none;
+  }
+  .foot .laptop {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  .foot .laptop .details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .foot .laptop .details img {
+    width: 3rem;
+    height: 3rem;
+  }
+  .foot .laptop .details .name {
+    color: white;
+  }
+  .foot .laptop .details .name h5 {
+    font-size: 1.1rem;
+  }
+  .foot .laptop .details .name p {
+    font-weight: 500;
+    opacity: 0.6;
+  }
+  .foot .laptop .btns {
+    font-size: 3rem;
+    color: white;
+    display: flex;
+    gap: 1.5rem;
+  }
+  .foot .laptop .controls {
+    display: flex;
+    gap: 3rem;
   }
 }/*# sourceMappingURL=style1.css.map */
