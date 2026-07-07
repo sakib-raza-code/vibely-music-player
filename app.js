@@ -34,12 +34,13 @@ class Song {
     const playBtn = document.querySelector(".playbtn");
     const pauseBtn = document.querySelector(".pausebtn");
     const progress = document.querySelector("#progress");
+    const volume = document.querySelector("#volume");
 
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
 const song2 = new Song("Taare" , "Farak" , "assets/Taare.mp3" , "none");
 const song3 = new Song("Beqarar Yeh Dil" , "Shuja Haider" , "assets/Beqarar Yeh Dil.mp3" , "none");
-
+const song4 = new Song("Idhar Zara Sa Dekh Lo" , "Shikhar" , "assets/Idhar Zara Sa Dekh Lo.mp3" , "none");
 
 // MusicPlayer class
 class MusicPlayer{
@@ -109,6 +110,9 @@ class MusicPlayer{
         let newTime = (percentage * duration) / 100;
         this.audio.currentTime = newTime;
     }
+    updateVolume(value){
+        this.audio.volume = value;
+    }
 }
 
 // adding songs
@@ -117,6 +121,7 @@ const player = new MusicPlayer;
 player.addSong(song1);
 player.addSong(song2);
 player.addSong(song3);
+player.addSong(song4);
 
 player.loadSong();
 
@@ -125,6 +130,12 @@ playBtn.addEventListener("click" , ()=>{
    player.togglePlay(); 
 });
 
+// progress bar update on drag
 progress.addEventListener("input", ()=>{
     player.seek(progress.value);
+})
+
+// volume update on drag
+volume.addEventListener("input" , ()=>{
+    player.updateVolume(volume.value);
 })
