@@ -31,8 +31,8 @@ class Song {
     const mobileArtist = document.querySelector(".m-artist");
     const laptopTitle = document.querySelector(".l-title");
     const laptopArtist = document.querySelector(".l-artist");
-    const playBtn = document.querySelector(".playbtn");
-    const pauseBtn = document.querySelector(".pausebtn");
+    const playBtn = document.querySelectorAll(".playbtn");
+    // const pauseBtn = document.querySelector(".pausebtn");
     const progress = document.querySelector("#progress");
     const volume = document.querySelector("#volume");
 
@@ -46,7 +46,7 @@ const song4 = new Song("Idhar Zara Sa Dekh Lo" , "Shikhar" , "assets/Idhar Zara 
 class MusicPlayer{
     constructor(){
         this.songs = [];
-        this.currentSongIdx = 0;
+        this.currentSongIdx = 3;
         this.audio = new Audio();
         this.updateTime();
         this.handleSongEnd();
@@ -64,6 +64,7 @@ class MusicPlayer{
         // add code to change cover page similerly
 
         this.audio.src = currentSong.path;
+        this.audio.load();
     }
     play(){
         this.audio.play();
@@ -74,10 +75,24 @@ class MusicPlayer{
     togglePlay(){
         if(this.audio.paused){
             this.play();
+            this.updatePlayIcon(true);
         }
         else{
             this.pause();
+            this.updatePlayIcon(false);
         }
+    }
+    updatePlayIcon(isPlaying){
+        playBtn.forEach((btn)=>{
+            if(isPlaying){
+                btn.classList.remove("ri-play-circle-fill");
+                btn.classList.add("ri-pause-circle-fill");
+            }
+            else{
+                btn.classList.remove("ri-pause-circle-fill");
+                btn.classList.add("ri-play-circle-fill");
+            }
+        })
     }
     next(){
         this.currentSongIdx++;
@@ -132,7 +147,10 @@ player.addSong(song4);
 player.loadSong();
 
 // play & pause system
-playBtn.addEventListener("click" , ()=>{
+playBtn[0].addEventListener("click" , ()=>{
+   player.togglePlay(); 
+});
+playBtn[1].addEventListener("click" , ()=>{
    player.togglePlay(); 
 });
 
