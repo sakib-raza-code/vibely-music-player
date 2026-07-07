@@ -118,6 +118,9 @@ class MusicPlayer{
     progressBar(){
         const currentTime = this.audio.currentTime;
         const duration = this.audio.duration;
+        if(isNaN(duration) || duration == 0){
+            return;
+        }
         let percentage =(currentTime / duration) * 100;
         progress.value = percentage;
     }
