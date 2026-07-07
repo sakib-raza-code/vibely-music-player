@@ -33,6 +33,7 @@ class Song {
     const laptopArtist = document.querySelector(".l-artist");
     const playBtn = document.querySelector(".playbtn");
     const pauseBtn = document.querySelector(".pausebtn");
+    const progress = document.querySelector("#progress");
 
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
@@ -44,8 +45,9 @@ const song3 = new Song("Beqarar Yeh Dil" , "Shuja Haider" , "assets/Beqarar Yeh 
 class MusicPlayer{
     constructor(){
         this.songs = [];
-        this.currentSongIdx = 1;
+        this.currentSongIdx = 0;
         this.audio = new Audio();
+        this.updateTime();
     }
     addSong(song) {
         this.songs.push(song);
@@ -91,6 +93,22 @@ class MusicPlayer{
         this.loadSong();
         this.play();
     }
+    progresBar(){
+        let currentTime = this.audio.currentTime;
+        const duration = this.audio.duration;
+        let percentage =(currentTime / duration) * 100;
+        progress.value = percentage;
+    }
+    updateTime(){
+        this.audio.addEventListener("timeupdate" , ()=>{
+            this.progresBar();
+        })
+    }
+    seek(percentage){
+        const duration =  this.audio.duration;
+        let newTime = (percentage * duration) / 100;
+        this.audio.currentTime = newTime;
+    }
 }
 
 // adding songs
@@ -106,3 +124,7 @@ player.loadSong();
 playBtn.addEventListener("click" , ()=>{
    player.togglePlay(); 
 });
+
+progress.addEventListener("input", ()=>{
+    player.seek(progress.value);
+})
