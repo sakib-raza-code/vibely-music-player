@@ -49,6 +49,7 @@ class MusicPlayer{
         this.currentSongIdx = 0;
         this.audio = new Audio();
         this.updateTime();
+        this.handleSongEnd();
     }
     addSong(song) {
         this.songs.push(song);
@@ -112,6 +113,11 @@ class MusicPlayer{
     }
     updateVolume(value){
         this.audio.volume = value;
+    }
+    handleSongEnd(){
+        this.audio.addEventListener("ended" , ()=>{
+            this.next();
+        })
     }
 }
 
