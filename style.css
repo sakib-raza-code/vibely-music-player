@@ -338,4 +338,16 @@ body {
     display: flex;
     gap: 3rem;
   }
+  .foot .laptop .controls .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+  }
+  .foot .laptop .controls .volume-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+  }
 }/*# sourceMappingURL=style.css.map */

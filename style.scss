@@ -382,6 +382,18 @@ body{
                 display: flex;
                 gap: 3rem;
 
+                .progress-bar{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: white;
+                }
+                .volume-bar{
+                    display: flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    color: white;
+                }
             }
         }
     }

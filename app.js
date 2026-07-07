@@ -34,8 +34,11 @@ class Song {
     const playBtn = document.querySelectorAll(".playbtn");
     const progress = document.querySelector("#progress");
     const volume = document.querySelector("#volume");
-    const backwardBtn = document.querySelector(".backbtn")
-    const forwardBtn = document.querySelector(".nextbtn")
+    const backwardBtn = document.querySelector(".backbtn");
+    const forwardBtn = document.querySelector(".nextbtn");
+    const liveTimer = document.querySelector(".current-time");
+    const totalTimer = document.querySelector(".total-time");
+    
 
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
@@ -51,6 +54,7 @@ class MusicPlayer{
         this.audio = new Audio();
         this.updateTime();
         this.handleSongEnd();
+        this.handleMetaData();
     }
     addSong(song) {
         this.songs.push(song);
@@ -111,15 +115,16 @@ class MusicPlayer{
         this.loadSong();
         this.play();
     }
-    progresBar(){
-        let currentTime = this.audio.currentTime;
+    progressBar(){
+        const currentTime = this.audio.currentTime;
         const duration = this.audio.duration;
         let percentage =(currentTime / duration) * 100;
         progress.value = percentage;
     }
     updateTime(){
         this.audio.addEventListener("timeupdate" , ()=>{
-            this.progresBar();
+            this.progressBar();
+            this.updateLiveTimer();
         })
     }
     seek(percentage){
@@ -134,6 +139,29 @@ class MusicPlayer{
         this.audio.addEventListener("ended" , ()=>{
             this.next();
         })
+    }
+    handleMetaData(){
+        this.audio.addEventListener("loadedmetadata" , ()=>{
+            this.updateTotalDuration();
+        })
+    }
+    updateLiveTimer(){
+        const currentTime = Math.floor(this.audio.currentTime);
+        const minute = Math.floor(currentTime / 60);
+        let second = currentTime % 60;
+        if(second < 10){
+            second = "0" + second;
+        }
+        liveTimer.textContent = `${minute}:${second}`;
+    }
+    updateTotalDuration(){
+        const totalDuration = Math.floor(this.audio.duration);
+        const totalMinute = Math.floor(totalDuration / 60);
+        let totalSecond = totalDuration % 60;
+        if(totalSecond < 10){
+            totalSecond = "0" + totalSecond;
+        }
+        totalTimer.textContent = `${totalMinute}:${totalSecond}`;
     }
 }
 
