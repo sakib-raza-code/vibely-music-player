@@ -73,18 +73,18 @@ class MusicPlayer{
     }
     play(){
         this.audio.play();
+        this.updatePlayIcon(true);
     }
     pause(){
         this.audio.pause();
+        this.updatePlayIcon(false);
     }
     togglePlay(){
         if(this.audio.paused){
             this.play();
-            this.updatePlayIcon(true);
         }
         else{
             this.pause();
-            this.updatePlayIcon(false);
         }
     }
     updatePlayIcon(isPlaying){
