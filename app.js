@@ -32,9 +32,10 @@ class Song {
     const laptopTitle = document.querySelector(".l-title");
     const laptopArtist = document.querySelector(".l-artist");
     const playBtn = document.querySelectorAll(".playbtn");
-    // const pauseBtn = document.querySelector(".pausebtn");
     const progress = document.querySelector("#progress");
     const volume = document.querySelector("#volume");
+    const backwardBtn = document.querySelector(".backbtn")
+    const forwardBtn = document.querySelector(".nextbtn")
 
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
@@ -46,7 +47,7 @@ const song4 = new Song("Idhar Zara Sa Dekh Lo" , "Shikhar" , "assets/Idhar Zara 
 class MusicPlayer{
     constructor(){
         this.songs = [];
-        this.currentSongIdx = 3;
+        this.currentSongIdx = 0;
         this.audio = new Audio();
         this.updateTime();
         this.handleSongEnd();
@@ -162,4 +163,13 @@ progress.addEventListener("input", ()=>{
 // volume update on drag
 volume.addEventListener("input" , ()=>{
     player.updateVolume(volume.value);
+}) 
+
+// next and previous song button logic
+backwardBtn.addEventListener("click" , ()=>{
+    player.next();
+})
+
+forwardBtn.addEventListener("click" , ()=>{
+    player.previous();
 })
