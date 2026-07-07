@@ -13,3 +13,96 @@ hamburger_menu.addEventListener("click" , ()=>{
         isSidebar = false;
     }
 })
+
+
+// Song class
+
+class Song {
+    constructor(title , artist , path , cover){
+        this.title = title;
+        this.artist = artist;
+        this.path = path;
+        this.cover = cover;
+    }
+}
+
+// DOM element selection
+    const mobileTitle = document.querySelector(".m-title");
+    const mobileArtist = document.querySelector(".m-artist");
+    const laptopTitle = document.querySelector(".l-title");
+    const laptopArtist = document.querySelector(".l-artist");
+    const playBtn = document.querySelector(".playbtn");
+    const pauseBtn = document.querySelector(".pausebtn");
+
+// adding object of some songs
+const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
+const song2 = new Song("Taare" , "Farak" , "assets/Taare.mp3" , "none");
+const song3 = new Song("Beqarar Yeh Dil" , "Shuja Haider" , "assets/Beqarar Yeh Dil.mp3" , "none");
+
+
+// MusicPlayer class
+class MusicPlayer{
+    constructor(){
+        this.songs = [];
+        this.currentSongIdx = 1;
+        this.audio = new Audio();
+    }
+    addSong(song) {
+        this.songs.push(song);
+    }
+    loadSong(){
+        let currentSong = this.songs[this.currentSongIdx];
+        mobileTitle.innerText = currentSong.title;
+        mobileArtist.innerText = currentSong.artist;
+
+        laptopTitle.innerText = currentSong.title;
+        laptopArtist.innerText = currentSong.artist;
+        // add code to change cover page similerly
+
+        this.audio.src = currentSong.path;
+    }
+    play(){
+        this.audio.play();
+    }
+    pause(){
+        this.audio.pause();
+    }
+    togglePlay(){
+        if(this.audio.paused){
+            this.play();
+        }
+        else{
+            this.pause();
+        }
+    }
+    next(){
+        this.currentSongIdx++;
+        if(this.currentSongIdx > this.songs.length - 1){
+            this.currentSongIdx = 0;
+        }
+        this.loadSong();
+        this.play();
+    }
+    previous(){
+        this.currentSongIdx--;
+        if(this.currentSongIdx < 0){
+            this.currentSongIdx = this.songs.length - 1;
+        }
+        this.loadSong();
+        this.play();
+    }
+}
+
+// adding songs
+const player = new MusicPlayer;
+
+player.addSong(song1);
+player.addSong(song2);
+player.addSong(song3);
+
+player.loadSong();
+
+// play & pause system
+playBtn.addEventListener("click" , ()=>{
+   player.togglePlay(); 
+});
