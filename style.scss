@@ -74,6 +74,9 @@ body{
     grid-area: main;
     background-color: sienna;
     padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 56px - 80px);
     .greet{
         background-image: url(assets/poster.jpg);
         background-size: cover;
@@ -129,6 +132,15 @@ body{
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: none;          // hide scroll bar 
+
+        .song-list::-webkit-scrollbar{      // hide scroll bar
+            display: none;
+        }
+
+
         .song{
             display: flex;
             align-items: center;
@@ -138,8 +150,8 @@ body{
             .details{
                 display: flex;
                 align-items: center;
-                justify-content: space-between;
-                width: 11rem;
+                gap: 1rem;
+                width: 80%;
 
                 img {
                     width: 3rem;
@@ -178,6 +190,10 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     .laptop{
         display: none;
     }
@@ -219,7 +235,7 @@ body{
     .m-progress-bar{
         width: 100%;
         background-color: blue;
-        height: 0.5rem;
+        height: 0.3rem;
         display: flex;
         align-items: center;
         input{
@@ -385,7 +401,7 @@ body{
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1rem;
+            padding: 0.8rem;
 
             .details{
                 display: flex;

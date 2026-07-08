@@ -39,6 +39,7 @@ class Song {
     const liveTimer = document.querySelector(".current-time");
     const totalTimer = document.querySelector(".total-time");
     const liveVolume = document.querySelector(".total-volume");
+    const songList = document.querySelector(".song-list");
     
 
 // adding object of some songs
@@ -59,6 +60,24 @@ class MusicPlayer{
     }
     addSong(song) {
         this.songs.push(song);
+        this.displaySong(song);
+    }
+    displaySong(song){
+        const songCard = `
+            <section class="song">
+                <div class="details">
+                    <img src="" alt="">
+                    <div class="name">
+                        <h5>${song.title}</h5>
+                        <p>${song.artist}</p>
+                    </div>
+                </div>
+                <div class="duration">
+                    <p>2:1</p>
+                </div>
+            </section>
+        `;
+        songList.insertAdjacentHTML("beforeend" , songCard);
     }
     loadSong(){
         let currentSong = this.songs[this.currentSongIdx];
