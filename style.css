@@ -162,6 +162,9 @@ body {
 .foot {
   grid-area: foot;
   background-color: red;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .foot .laptop {
   display: none;
@@ -171,7 +174,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 .foot .mobile .details {
   display: flex;
@@ -194,10 +197,38 @@ body {
 }
 .foot .mobile i {
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: 3rem;
 }
 .foot .mobile .pause {
   display: none;
+}
+.foot .m-progress-bar {
+  width: 100%;
+  background-color: blue;
+  height: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.foot .m-progress-bar input {
+  --progress: 0%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #00E5FF 0%, #22C55E var(--progress), #000 var(--progress), #000 100%);
+}
+.foot .m-progress-bar input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+.foot .m-progress-bar input[type=range]::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
+  background: transparent;
 }
 
 @media (min-width: 1020px) {
@@ -338,7 +369,7 @@ body {
     display: flex;
     gap: 3rem;
   }
-  .foot .laptop .controls .progress-bar {
+  .foot .laptop .controls .l-progress-bar {
     display: flex;
     align-items: center;
     gap: 0.5rem;

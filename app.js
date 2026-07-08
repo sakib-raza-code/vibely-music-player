@@ -32,12 +32,13 @@ class Song {
     const laptopTitle = document.querySelector(".l-title");
     const laptopArtist = document.querySelector(".l-artist");
     const playBtn = document.querySelectorAll(".playbtn");
-    const progress = document.querySelector("#progress");
+    const progress = document.querySelectorAll("#progress");
     const volume = document.querySelector("#volume");
     const backwardBtn = document.querySelector(".backbtn");
     const forwardBtn = document.querySelector(".nextbtn");
     const liveTimer = document.querySelector(".current-time");
     const totalTimer = document.querySelector(".total-time");
+    const liveVolume = document.querySelector(".total-volume");
     
 
 // adding object of some songs
@@ -122,7 +123,9 @@ class MusicPlayer{
             return;
         }
         let percentage =(currentTime / duration) * 100;
-        progress.value = percentage;
+        progress[0].value = percentage;                 // for mobile progress bar
+        progress[1].value = percentage;                 // for laptop progress bar
+        progress[0].style.setProperty("--progress" , `${percentage}%`);
     }
     updateTime(){
         this.audio.addEventListener("timeupdate" , ()=>{
@@ -137,6 +140,11 @@ class MusicPlayer{
     }
     updateVolume(value){
         this.audio.volume = value;
+        this.updateLiveVolume();
+    }
+    updateLiveVolume(){
+        const currentVolume = Math.floor((volume.value) * 100);
+        liveVolume.textContent = `${currentVolume}%`;
     }
     handleSongEnd(){
         this.audio.addEventListener("ended" , ()=>{
@@ -146,6 +154,7 @@ class MusicPlayer{
     handleMetaData(){
         this.audio.addEventListener("loadedmetadata" , ()=>{
             this.updateTotalDuration();
+            this.updateLiveVolume();
         })
     }
     updateLiveTimer(){
@@ -187,8 +196,11 @@ playBtn[1].addEventListener("click" , ()=>{
 });
 
 // progress bar update on drag
-progress.addEventListener("input", ()=>{
-    player.seek(progress.value);
+progress[0].addEventListener("input", ()=>{
+    player.seek(progress[0].value);
+})
+progress[1].addEventListener("input", ()=>{
+    player.seek(progress[1].value);
 })
 
 // volume update on drag
@@ -198,9 +210,9 @@ volume.addEventListener("input" , ()=>{
 
 // next and previous song button logic
 backwardBtn.addEventListener("click" , ()=>{
-    player.next();
+    player.previous();
 })
 
 forwardBtn.addEventListener("click" , ()=>{
-    player.previous();
+    player.next();
 })
