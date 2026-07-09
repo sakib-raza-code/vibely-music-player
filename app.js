@@ -23,6 +23,7 @@ class Song {
         this.artist = artist;
         this.path = path;
         this.cover = cover;
+        this.duration = "";
     }
 }
 
@@ -58,9 +59,23 @@ class MusicPlayer{
     }
     addSong(song) {
         this.songs.push(song);
-        this.displaySong(song);
+        this.loadSongDuration(song);
+    }
+    loadSongDuration(song){
+        let tempAudio = new Audio();
+        tempAudio.src = song.path;
+        tempAudio.addEventListener("loadedmetadata" , ()=>{
+            song.duration = tempAudio.duration;
+            this.displaySong(song);
+        })
     }
     displaySong(song){
+        const totalDuration = Math.floor(song.duration);
+        const minute = Math.floor(totalDuration / 60);
+        let second = totalDuration % 60;
+        if(second < 10){ second = "0" + second}
+        console.log(minute);
+        console.log(second)
         const songCard = `
             <section class="song">
                 <div class="details">
@@ -71,7 +86,7 @@ class MusicPlayer{
                     </div>
                 </div>
                 <div class="duration">
-                    <p>2:1</p>
+                    <p>${minute}:${second}</p>
                 </div>
             </section>
         `;
