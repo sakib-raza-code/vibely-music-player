@@ -32,12 +32,10 @@ class Song {
     const laptopTitle = document.querySelector(".l-title");
     const laptopArtist = document.querySelector(".l-artist");
     const playBtn = document.querySelectorAll(".playbtn");
-    const progress = document.querySelectorAll("#progress");
+    const progress = document.querySelector("#progress");
     const volume = document.querySelector("#volume");
     const backwardBtn = document.querySelector(".backbtn");
     const forwardBtn = document.querySelector(".nextbtn");
-    const liveTimer = document.querySelector(".current-time");
-    const totalTimer = document.querySelector(".total-time");
     const liveVolume = document.querySelector(".total-volume");
     const songList = document.querySelector(".song-list");
     
@@ -142,14 +140,12 @@ class MusicPlayer{
             return;
         }
         let percentage =(currentTime / duration) * 100;
-        progress[0].value = percentage;                 // for mobile progress bar
-        progress[1].value = percentage;                 // for laptop progress bar
-        progress[0].style.setProperty("--progress" , `${percentage}%`);
+        progress.value = percentage;                 // for mobile progress bar
+        progress.style.setProperty("--progress" , `${percentage}%`);
     }
     updateTime(){
         this.audio.addEventListener("timeupdate" , ()=>{
             this.progressBar();
-            this.updateLiveTimer();
         })
     }
     seek(percentage){
@@ -172,27 +168,8 @@ class MusicPlayer{
     }
     handleMetaData(){
         this.audio.addEventListener("loadedmetadata" , ()=>{
-            this.updateTotalDuration();
             this.updateLiveVolume();
         })
-    }
-    updateLiveTimer(){
-        const currentTime = Math.floor(this.audio.currentTime);
-        const minute = Math.floor(currentTime / 60);
-        let second = currentTime % 60;
-        if(second < 10){
-            second = "0" + second;
-        }
-        liveTimer.textContent = `${minute}:${second}`;
-    }
-    updateTotalDuration(){
-        const totalDuration = Math.floor(this.audio.duration);
-        const totalMinute = Math.floor(totalDuration / 60);
-        let totalSecond = totalDuration % 60;
-        if(totalSecond < 10){
-            totalSecond = "0" + totalSecond;
-        }
-        totalTimer.textContent = `${totalMinute}:${totalSecond}`;
     }
 }
 
@@ -215,11 +192,8 @@ playBtn[1].addEventListener("click" , ()=>{
 });
 
 // progress bar update on drag
-progress[0].addEventListener("input", ()=>{
-    player.seek(progress[0].value);
-})
-progress[1].addEventListener("input", ()=>{
-    player.seek(progress[1].value);
+progress.addEventListener("input", ()=>{
+    player.seek(progress.value);
 })
 
 // volume update on drag
