@@ -39,7 +39,7 @@ class Song {
     const forwardBtn = document.querySelector(".nextbtn");
     const liveVolume = document.querySelector(".total-volume");
     const songList = document.querySelector(".song-list");
-    
+    const songs = document.querySelector(".song-list");
 
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
@@ -74,10 +74,9 @@ class MusicPlayer{
         const minute = Math.floor(totalDuration / 60);
         let second = totalDuration % 60;
         if(second < 10){ second = "0" + second}
-        console.log(minute);
-        console.log(second)
-        const songCard = `
-            <section class="song">
+        let index = this.songs.indexOf(song);
+        const songCard = ` 
+            <section class="song" data-index="${index}" >
                 <div class="details">
                     <img src="" alt="">
                     <div class="name">
@@ -186,6 +185,11 @@ class MusicPlayer{
             this.updateLiveVolume();
         })
     }
+    songPlayOnClick(song){
+        this.currentSongIdx = song.dataset.index;
+        this.loadSong();
+        this.play();
+    }
 }
 
 // adding songs
@@ -197,7 +201,6 @@ player.addSong(song3);
 player.addSong(song4);
 
 player.loadSong();
-
 // play & pause system
 playBtn[0].addEventListener("click" , ()=>{
    player.togglePlay(); 
@@ -224,3 +227,9 @@ backwardBtn.addEventListener("click" , ()=>{
 forwardBtn.addEventListener("click" , ()=>{
     player.next();
 })
+
+// song play on click on any song
+songs.addEventListener("click" ,(e) =>{
+    player.songPlayOnClick(e.target.closest(".song"));
+})
+
