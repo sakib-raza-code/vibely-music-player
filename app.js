@@ -39,8 +39,8 @@ class Song {
     const forwardBtn = document.querySelector(".nextbtn");
     const liveVolume = document.querySelector(".total-volume");
     const songList = document.querySelector(".song-list");
-    const songs = document.querySelector(".song-list");
-
+    
+    
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
 const song2 = new Song("Taare" , "Farak" , "assets/Taare.mp3" , "none");
@@ -106,6 +106,7 @@ class MusicPlayer{
     play(){
         this.audio.play();
         this.updatePlayIcon(true);
+        this.highlightPlayingSong();
     }
     pause(){
         this.audio.pause();
@@ -186,9 +187,22 @@ class MusicPlayer{
         })
     }
     songPlayOnClick(song){
-        this.currentSongIdx = song.dataset.index;
+        this.currentSongIdx = Number(song.dataset.index);
         this.loadSong();
         this.play();
+    }
+    highlightPlayingSong(){
+        const cards = document.querySelectorAll(".song");
+
+        cards.forEach((card) => {
+            card.classList.remove("song-highlight");
+        });
+
+        const currentCard = document.querySelector(
+            `.song[data-index="${this.currentSongIdx}"]`
+        );
+
+        currentCard.classList.add("song-highlight");
     }
 }
 
@@ -229,7 +243,6 @@ forwardBtn.addEventListener("click" , ()=>{
 })
 
 // song play on click on any song
-songs.addEventListener("click" ,(e) =>{
+songList.addEventListener("click" ,(e) =>{
     player.songPlayOnClick(e.target.closest(".song"));
 })
-

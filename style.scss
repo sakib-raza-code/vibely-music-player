@@ -127,6 +127,9 @@ body{
         display: none;
     }
 
+    .song-highlight{            // for highlight the current playing song
+        border: 2px solid black;
+    }
     .song-list{
         margin-top: 1rem;
         display: flex;
@@ -139,8 +142,6 @@ body{
         .song-list::-webkit-scrollbar{      // hide scroll bar
             display: none;
         }
-
-
         .song{
             display: flex;
             align-items: center;

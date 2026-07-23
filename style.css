@@ -122,6 +122,9 @@ body {
 .main .titles {
   display: none;
 }
+.main .song-highlight {
+  border: 2px solid black;
+}
 .main .song-list {
   margin-top: 1rem;
   display: flex;
