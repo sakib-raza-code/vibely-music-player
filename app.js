@@ -39,13 +39,14 @@ class Song {
     const forwardBtn = document.querySelector(".nextbtn");
     const liveVolume = document.querySelector(".total-volume");
     const songList = document.querySelector(".song-list");
-    
+    const searchInput = document.querySelector(".search-input");
     
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
 const song2 = new Song("Taare" , "Farak" , "assets/Taare.mp3" , "none");
 const song3 = new Song("Beqarar Yeh Dil" , "Shuja Haider" , "assets/Beqarar Yeh Dil.mp3" , "none");
 const song4 = new Song("Idhar Zara Sa Dekh Lo" , "Shikhar" , "assets/Idhar Zara Sa Dekh Lo.mp3" , "none");
+const song5 = new Song("Tasawur" , "Muztar Khairabad" , "assets/Tasawur.mp3" , "none");
 
 // MusicPlayer class
 class MusicPlayer{
@@ -170,20 +171,35 @@ class MusicPlayer{
     }
     updateVolume(value){
         this.audio.volume = value;
-        this.updateLiveVolume();
+        this.saveVolume(value);
+        liveVolume.textContent = `${Math.floor(value * 100)}%`;
     }
-    updateLiveVolume(){
-        const currentVolume = Math.floor((volume.value) * 100);
-        liveVolume.textContent = `${currentVolume}%`;
+
+    loadVolume(){
+        const savedVolume = localStorage.getItem("volume");
+        if(savedVolume !== null){
+            const volumeValue = Number(savedVolume);
+
+            this.audio.volume = volumeValue;
+            volume.value = volumeValue;
+            
+            liveVolume.textContent = `${Math.floor(volumeValue * 100)}%`;
+        }
+        else{
+            liveVolume.textContent = `${Math.floor(volume.value * 100)}%`;
+        }
+    }
+    saveVolume(volume){
+        localStorage.setItem("volume" , volume);
+    }
+    handleMetaData(){
+        this.audio.addEventListener("loadedmetadata" , ()=>{
+            this.loadVolume();
+        })
     }
     handleSongEnd(){
         this.audio.addEventListener("ended" , ()=>{
             this.next();
-        })
-    }
-    handleMetaData(){
-        this.audio.addEventListener("loadedmetadata" , ()=>{
-            this.updateLiveVolume();
         })
     }
     songPlayOnClick(song){
@@ -204,6 +220,20 @@ class MusicPlayer{
 
         currentCard.classList.add("song-highlight");
     }
+    searchHandle(){
+        searchInput.addEventListener("input" , (e) => {
+            const searchText = e.target.value;
+
+            const filterSongs = this.songs.filter(song =>{ 
+                return song.title.toLowerCase().includes(searchText.toLowerCase())
+            });
+
+            songList.innerHTML = "";
+
+            filterSongs.forEach(song => this.displaySong(song));
+
+        });
+    }
 }
 
 // adding songs
@@ -213,6 +243,7 @@ player.addSong(song1);
 player.addSong(song2);
 player.addSong(song3);
 player.addSong(song4);
+player.addSong(song5);
 
 player.loadSong();
 // play & pause system
@@ -231,7 +262,10 @@ progress.addEventListener("input", ()=>{
 // volume update on drag
 volume.addEventListener("input" , ()=>{
     player.updateVolume(volume.value);
-}) 
+})
+
+// volume load from local storage
+player.loadVolume();
 
 // next and previous song button logic
 backwardBtn.addEventListener("click" , ()=>{
@@ -246,3 +280,6 @@ forwardBtn.addEventListener("click" , ()=>{
 songList.addEventListener("click" ,(e) =>{
     player.songPlayOnClick(e.target.closest(".song"));
 })
+
+// Search feature
+player.searchHandle();

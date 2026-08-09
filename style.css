@@ -30,8 +30,23 @@ body {
   justify-content: space-between;
   color: white;
 }
-.navbar input {
-  display: none;
+.navbar .search-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid gray;
+  padding: 0.3rem 0.7rem;
+  border-radius: 10px;
+  width: 40%;
+}
+.navbar .search-bar input {
+  display: block;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
 }
 .navbar i {
   font-size: clamp(1.5rem, 8vw, 1.8rem);
@@ -46,9 +61,14 @@ body {
   background-color: blue;
   position: fixed;
   top: 3.5rem;
-  height: calc(100vh - 5rem);
-  width: 60%;
+  left: 0;
+  height: calc(100vh - 8.5rem);
+  width: 70%;
   max-width: 300px;
+  z-index: 10;
+  padding: 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
 }
 .sidebar .logo {
   display: flex;
@@ -60,11 +80,11 @@ body {
 }
 
 .show {
-  display: block;
+  transform: translateX(0);
 }
 
 .hide {
-  display: none;
+  transform: translateX(-100%);
 }
 
 .main {
@@ -181,6 +201,9 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 5rem;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .foot .laptop {
   display: none;
@@ -222,6 +245,7 @@ body {
   width: 100%;
   background-color: blue;
   height: 0.3rem;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
 }
@@ -279,13 +303,12 @@ body {
     background-color: black;
     color: white;
   }
-  .hide {
-    display: block;
-  }
   .sidebar {
     top: 0;
     width: 15rem;
+    height: calc(100vh - 5rem);
     padding: 1rem;
+    transform: translateX(0);
   }
   .sidebar .logo {
     display: flex;
@@ -345,6 +368,9 @@ body {
   }
   .main .song-list .song .duration p {
     text-align: end;
+  }
+  #progress {
+    cursor: pointer;
   }
   .foot .mobile {
     display: none;
