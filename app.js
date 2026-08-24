@@ -32,6 +32,8 @@ class Song {
     const mobileArtist = document.querySelector(".m-artist");
     const laptopTitle = document.querySelector(".l-title");
     const laptopArtist = document.querySelector(".l-artist");
+    const mobileCoverImage = document.querySelector(".mobile-cover");
+    const laptopCoverImage = document.querySelector(".laptop-cover");
     const playBtn = document.querySelectorAll(".playbtn");
     const progress = document.querySelector("#progress");
     const volume = document.querySelector("#volume");
@@ -43,12 +45,9 @@ class Song {
     const resumeButton = document.getElementById("resume");
     
     
-// adding object of some songs
-const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
-const song2 = new Song("Taare" , "Farak" , "assets/Taare.mp3" , "none");
-const song3 = new Song("Beqarar Yeh Dil" , "Shuja Haider" , "assets/Beqarar Yeh Dil.mp3" , "none");
-const song4 = new Song("Idhar Zara Sa Dekh Lo" , "Shikhar" , "assets/Idhar Zara Sa Dekh Lo.mp3" , "none");
-const song5 = new Song("Tasawur" , "Muztar Khairabad" , "assets/Tasawur.mp3" , "none");
+// add songs here
+const song1 = new Song("Motivate-Me" , "Mixaund" , "assets/music/motivate-me.mp3" , "assets/posters/mixaund-motivate-me.jpg");
+const song2 = new Song("Happy Days" , "FSM Team" , "assets/music/happy-days.mp3" , "assets/posters/fsm-team-happy-days.jpg");
 
 // MusicPlayer class
 class MusicPlayer{
@@ -82,7 +81,7 @@ class MusicPlayer{
         const songCard = ` 
             <section class="song" data-index="${index}" >
                 <div class="details">
-                    <img src="" alt="">
+                    <img src=${song.cover} alt="cover image">
                     <div class="name">
                         <h5>${song.title}</h5>
                         <p>${song.artist}</p>
@@ -96,12 +95,18 @@ class MusicPlayer{
         songList.insertAdjacentHTML("beforeend" , songCard);
     }
     loadSong(){
+        if (this.currentSongIdx < 0 || this.currentSongIdx >= this.songs.length){
+            this.currentSongIdx = 0;
+        }
+
         let currentSong = this.songs[this.currentSongIdx];
         mobileTitle.innerText = currentSong.title;
         mobileArtist.innerText = currentSong.artist;
+        mobileCoverImage.src = currentSong.cover;
 
         laptopTitle.innerText = currentSong.title;
         laptopArtist.innerText = currentSong.artist;
+        laptopCoverImage.src = currentSong.cover;
         // add code to change cover page similerly
 
         this.saveSong(this.currentSongIdx);
@@ -272,9 +277,6 @@ const player = new MusicPlayer;
 
 player.addSong(song1);
 player.addSong(song2);
-player.addSong(song3);
-player.addSong(song4);
-player.addSong(song5);
 
 player.loadSong();
 // play & pause system
@@ -309,6 +311,9 @@ forwardBtn.addEventListener("click" , ()=>{
 
 // song play on click on any song
 songList.addEventListener("click" ,(e) =>{
+    const song = e.target.closest(".song");
+    if (!song) return;
+
     player.songPlayOnClick(e.target.closest(".song"));
 })
 
