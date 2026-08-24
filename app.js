@@ -40,6 +40,8 @@ class Song {
     const liveVolume = document.querySelector(".total-volume");
     const songList = document.querySelector(".song-list");
     const searchInput = document.querySelector(".search-input");
+    const resumeButton = document.getElementById("resume");
+    
     
 // adding object of some songs
 const song1 = new Song("Tajdar-e-Haram" , "Atif Aslam" , "assets/Tajdar-e-Haram.mp3" , "none");
@@ -52,7 +54,8 @@ const song5 = new Song("Tasawur" , "Muztar Khairabad" , "assets/Tasawur.mp3" , "
 class MusicPlayer{
     constructor(){
         this.songs = [];
-        this.currentSongIdx = 0;
+        const savedSong = localStorage.getItem("lastSong");
+        this.currentSongIdx = savedSong != null ? Number(savedSong) : 0;
         this.audio = new Audio();
         this.updateTime();
         this.handleSongEnd();
@@ -101,8 +104,16 @@ class MusicPlayer{
         laptopArtist.innerText = currentSong.artist;
         // add code to change cover page similerly
 
+        this.saveSong(this.currentSongIdx);
         this.audio.src = currentSong.path;
         this.audio.load();
+
+        this.audio.addEventListener("loadedmetadata", () => {
+            this.loadTime();
+        }, { once: true });
+    }
+    saveSong(song){
+        localStorage.setItem("lastSong", song);
     }
     play(){
         this.audio.play();
@@ -155,9 +166,29 @@ class MusicPlayer{
         if(isNaN(duration) || duration == 0){
             return;
         }
+        this.saveTime(currentTime);
         let percentage =(currentTime / duration) * 100;
         progress.value = percentage;                 // for mobile progress bar
         progress.style.setProperty("--progress" , `${percentage}%`);
+    }
+    loadTime(){
+        const savedData = localStorage.getItem("songProgress");
+        if(savedData != null){
+            const data = JSON.parse(savedData);
+
+            if (data.index === this.currentSongIdx) {
+                this.audio.currentTime = data.time;
+            }
+        }
+
+    }
+    saveTime(time){
+        const data = {
+            index: this.currentSongIdx,
+            time: time
+        };
+
+        localStorage.setItem("songProgress", JSON.stringify(data));
     }
     updateTime(){
         this.audio.addEventListener("timeupdate" , ()=>{
@@ -283,3 +314,23 @@ songList.addEventListener("click" ,(e) =>{
 
 // Search feature
 player.searchHandle();
+
+//Resume button on top
+const icon = document.querySelector(".top-icon");
+let state = 0;
+resumeButton.addEventListener("click" , ()=>{
+    
+    if(state == 0){
+        icon.classList.remove("ri-play-mini-fill");
+        icon.classList.add("ri-pause-mini-fill");
+        state = 1;
+        player.play();
+    }
+    else{
+        icon.classList.remove("ri-pause-mini-fill");
+        icon.classList.add("ri-play-mini-fill");
+        state = 0;
+        player.pause();
+    }
+    
+});

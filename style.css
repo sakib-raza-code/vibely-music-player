@@ -14,7 +14,7 @@ html {
 }
 
 body {
-  background-color: black;
+  background-color: #0b0b0f;
   display: grid;
   grid-template-columns: 0px 1fr;
   grid-template-rows: 3.5rem 1fr 5rem;
@@ -22,13 +22,15 @@ body {
 }
 
 .navbar {
+  background-color: #111116;
   grid-area: navbar;
   padding: 1rem;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
+  color: #ffffff;
+  border-bottom: 1px solid #2a2a35;
 }
 .navbar .search-bar {
   display: flex;
@@ -45,8 +47,8 @@ body {
   outline: none;
   width: 100%;
   font-size: 1rem;
-  background-color: black;
-  color: white;
+  background-color: #111116;
+  color: #ffffff;
 }
 .navbar i {
   font-size: clamp(1.5rem, 8vw, 1.8rem);
@@ -58,25 +60,53 @@ body {
 
 .sidebar {
   grid-area: sidebar;
-  background-color: blue;
+  background-color: #12121a;
+  border-right: 1px solid #2a2a35;
+  color: #ffffff;
   position: fixed;
   top: 3.5rem;
   left: 0;
-  height: calc(100vh - 8.5rem);
   width: 70%;
   max-width: 300px;
+  height: calc(100vh - 8.5rem);
   z-index: 10;
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   transform: translateX(-100%);
   transition: transform 0.3s ease;
 }
-.sidebar .logo {
+.sidebar .logo i {
+  display: none;
+}
+.sidebar .logo h3 {
+  display: none;
+}
+.sidebar .options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.sidebar .options .optn {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  color: white;
+  gap: 0.8rem;
   width: 100%;
-  font-size: 1.5rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  color: #a1a1aa;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.sidebar .options .optn i {
+  font-size: 1.3rem;
+  width: 1.5rem;
+}
+.sidebar .options .optn h4 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.sidebar .options .optn:hover {
+  background-color: rgba(139, 92, 246, 0.12);
+  color: #a78bfa;
 }
 
 .show {
@@ -89,19 +119,21 @@ body {
 
 .main {
   grid-area: main;
-  background-color: sienna;
+  background-color: #0b0b0f;
   padding: 0 1rem;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 56px - 80px);
+  color: #ffffff;
 }
 .main .greet {
   background-image: url(assets/poster.jpg);
   background-size: cover;
   background-position: center;
   padding: 1rem;
-  background-color: black;
-  color: white;
+  background-color: #181820;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  color: #ffffff;
   margin: 1.5rem 0;
   display: flex;
   flex-direction: column;
@@ -133,8 +165,8 @@ body {
   justify-content: center;
   gap: 0.2rem;
   border: none;
-  background: linear-gradient(to right, #e100ff, #7f00ff);
-  color: white;
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  color: #ffffff;
 }
 .main .greet button i {
   font-size: 1.5rem;
@@ -143,7 +175,8 @@ body {
   display: none;
 }
 .main .song-highlight {
-  border: 2px solid black;
+  background-color: #241b3d;
+  border: 1px solid #8b5cf6;
 }
 .main .song-list {
   margin-top: 1rem;
@@ -163,6 +196,13 @@ body {
   justify-content: space-between;
   padding: 1rem;
   border-radius: 10px;
+  background-color: #181820;
+  border: 1px solid transparent;
+  transition: 0.2s ease;
+}
+.main .song-list .song:hover {
+  background-color: #22222d;
+  border-color: #2a2a35;
 }
 .main .song-list .song .details {
   display: flex;
@@ -193,7 +233,8 @@ body {
 
 .foot {
   grid-area: foot;
-  background-color: red;
+  background-color: #14141b;
+  border-top: 1px solid #2a2a35;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -213,33 +254,58 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem;
 }
 .foot .mobile .details {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.7rem;
 }
 .foot .mobile .details img {
   width: 3rem;
   height: 3rem;
+  flex-shrink: 0;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .foot .mobile .details .name {
-  color: white;
+  min-width: 0;
+  color: #ffffff;
+}
+.foot .mobile .details .name h5, .foot .mobile .details .name p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
 .foot .mobile .details .name h5 {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 .foot .mobile .details .name p {
+  font-size: 0.85rem;
   font-weight: 500;
-  opacity: 0.6;
+  color: #a1a1aa;
+}
+.foot .mobile .mobile-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 .foot .mobile i {
   font-style: normal;
-  font-size: 3rem;
+  color: #a78bfa;
+  cursor: pointer;
+  transition: 0.2s ease;
 }
-.foot .mobile .pause {
-  display: none;
+.foot .mobile .backbtn, .foot .mobile .nextbtn {
+  font-size: 1.5rem;
+}
+.foot .mobile .playbtn {
+  font-size: 2.5rem;
+}
+.foot .mobile i:hover {
+  color: #8b5cf6;
+  transform: scale(1.1);
 }
 .foot .m-progress-bar {
   width: 100%;
@@ -256,7 +322,7 @@ body {
        appearance: none;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #00E5FF 0%, #22C55E var(--progress), #000 var(--progress), #000 100%);
+  background: linear-gradient(to right, #a78bfa 0%, #8b5cf6 var(--progress), #292932 var(--progress), #292932 100%);
 }
 .foot .m-progress-bar input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -288,7 +354,7 @@ body {
   .navbar .search-bar {
     display: flex;
     align-items: center;
-    border: 1px solid gray;
+    border: 1px solid #2a2a35;
     padding: 0.3rem 1rem;
     border-radius: 10px;
     width: 40%;
@@ -300,7 +366,7 @@ body {
     width: 100%;
     height: 100%;
     font-size: 1rem;
-    background-color: black;
+    background-color: #111116;
     color: white;
   }
   .sidebar {
@@ -314,32 +380,20 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: white;
+    color: #ffffff;
     width: 100%;
     font-size: 1.5rem;
   }
+  .sidebar .logo i {
+    display: block;
+    font-size: 1.5rem;
+  }
+  .sidebar .logo h3 {
+    display: block;
+    font-size: 1.4rem;
+  }
   .sidebar .options {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  .sidebar .options .optn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 0.5rem;
-    color: white;
-  }
-  .sidebar .options .optn i {
-    font-size: 1.2rem;
-  }
-  .sidebar .options .optn h4 {
-    font-size: 1rem;
-  }
-  .sidebar .options .optn:hover {
-    background-color: rgba(136, 18, 254, 0.4235294118);
-    border-radius: 8px;
+    margin-top: 2.5rem;
   }
   .main .titles {
     padding: 1rem 1.5rem;
@@ -377,12 +431,14 @@ body {
   }
   .foot .laptop {
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
     align-items: center;
-    justify-content: space-between;
     padding: 0.8rem;
   }
   .foot .laptop .details {
+    width: 100%;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -390,37 +446,58 @@ body {
   .foot .laptop .details img {
     width: 3rem;
     height: 3rem;
+    flex-shrink: 0;
+    -o-object-fit: cover;
+       object-fit: cover;
   }
   .foot .laptop .details .name {
-    color: white;
+    min-width: 0;
+  }
+  .foot .laptop .details .name h5,
+  .foot .laptop .details .name p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
   }
   .foot .laptop .details .name h5 {
     font-size: 1.1rem;
+    color: #ffffff;
   }
   .foot .laptop .details .name p {
     font-weight: 500;
     opacity: 0.6;
+    color: #a1a1aa;
   }
   .foot .laptop .btns {
-    font-size: 3rem;
-    color: white;
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 1.5rem;
+    font-size: 3rem;
+    color: #ffffff;
+  }
+  .foot .laptop .btns i {
+    color: #a78bfa;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  .foot .laptop .btns i:hover {
+    color: #8b5cf6;
+    transform: scale(1.1);
   }
   .foot .laptop .controls {
     display: flex;
-    gap: 3rem;
-  }
-  .foot .laptop .controls .l-progress-bar {
-    display: flex;
+    justify-content: flex-end;
     align-items: center;
-    gap: 0.5rem;
-    color: white;
+    color: #a1a1aa;
+  }
+  .foot .laptop .controls input {
+    accent-color: #8b5cf6;
   }
   .foot .laptop .controls .volume-bar {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: white;
   }
 }/*# sourceMappingURL=style.css.map */
