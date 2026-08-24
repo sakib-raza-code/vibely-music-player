@@ -1,6 +1,10 @@
-# 🎵 Music Player
+# 🎵 Vibely
 
 A responsive music player built using HTML, CSS, and JavaScript.
+
+## 🌐 Live Demo
+
+[**Open Vibely**] https://sakib-raza-code.github.io/vibely-music-player/
 
 ## ✨ Features
 
