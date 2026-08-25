@@ -339,3 +339,23 @@ resumeButton.addEventListener("click" , ()=>{
     }
     
 });
+
+
+// update greeting message according to time
+
+const greetingMessage = document.querySelector(".message");
+
+const currentTime = new Date().getHours();
+
+if(currentTime >= 5 && currentTime < 12){
+    greetingMessage.innerText = "Good Morning👋";
+}
+else if(currentTime >= 12 && currentTime < 17){
+    greetingMessage.innerText = "Good Afternoon👋";
+}
+else if(currentTime >= 17 && currentTime < 22){
+    greetingMessage.innerText = "Good Evening👋";
+}
+else {
+    greetingMessage.innerText = "Good Night👋";
+}
