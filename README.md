@@ -71,5 +71,3 @@ All rights to the music belong to their respective creators.
 **SAKIB RAZA**
 
 ---
-
-⭐ This project was created for learning and practice.
